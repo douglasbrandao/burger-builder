@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Aux from '../../../hoc/Aux';
 import Button from '../../UI/Button';
 
@@ -25,6 +26,13 @@ const orderSummary = props => {
       <Button btnType="Success" clicked={props.purchaseContinued}>CONTINUE</Button>
     </Aux>
   )
+}
+
+orderSummary.propTypes = {
+  ingredients: PropTypes.object.isRequired,
+  price: PropTypes.number.isRequired,
+  purchaseCancelled: PropTypes.func.isRequired,
+  purchaseContinued: PropTypes.func.isRequired
 }
 
 export default orderSummary;
