@@ -15,7 +15,7 @@ buildControl.propTypes = {
   label: PropTypes.string.isRequired,
   removed: PropTypes.func.isRequired,
   added: PropTypes.func.isRequired,
-  disabled: PropTypes.object.isRequired,
+  disabled: PropTypes.bool.isRequired,
 }
 
 export default buildControl;

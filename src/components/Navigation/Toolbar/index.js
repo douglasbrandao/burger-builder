@@ -18,6 +18,6 @@ const toolbar = props => (
 );
 
 toolbar.propTypes = {
-  clicked: PropTypes.func.isRequired
+  clicked: PropTypes.func
 }
 export default toolbar;
