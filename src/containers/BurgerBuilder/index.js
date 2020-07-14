@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import axios from '../../axios-orders';
 import Aux from '../../hoc/Aux';
 import Burger from '../../components/Burger';
 import BuildControls from '../../components/Burger/BuildControls';
@@ -77,7 +77,24 @@ class BurgerBuilder extends Component {
   }
 
   purchaseContinueHandler = () => {
-    alert('You continue!');
+    // alert('You continue!');
+    const order = {
+      ingredients: this.state.ingredients,
+      price: this.state.totalPrice,
+      customer: {
+        name: 'Douglas Frota',
+        address: {
+          street: 'Romenia Street',
+          zipCode: '78040-310',
+          country: 'Brazil'
+        },
+        email: 'test@test.com'
+      },
+      deliveryMethod: 'fastest'
+    }
+    axios.post('/orders.json', order)
+      .then(response => console.log(response))
+      .catch(error => console.log(error));
   }
 
   render() {
