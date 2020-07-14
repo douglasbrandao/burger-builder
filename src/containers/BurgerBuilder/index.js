@@ -6,6 +6,7 @@ import BuildControls from '../../components/Burger/BuildControls';
 import Modal from '../../components/UI/Modal';
 import Spinner from '../../components/UI/Spinner';
 import OrderSummary from '../../components/Burger/OrderSummary';
+import withErrorHandler from '../../hoc/withErrorHandler';
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -111,6 +112,7 @@ class BurgerBuilder extends Component {
     for (let key in disabledInfo) {
       disabledInfo[key] = disabledInfo[key] <= 0;
     }
+
     let orderSummary = <OrderSummary
       ingredients={this.state.ingredients}
       price={this.state.totalPrice.toFixed(2)}
@@ -141,4 +143,4 @@ class BurgerBuilder extends Component {
   }
 }
 
-export default BurgerBuilder; 
+export default withErrorHandler(BurgerBuilder, axios);

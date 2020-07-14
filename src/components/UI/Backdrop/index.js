@@ -7,7 +7,7 @@ const background = props => (
 );
 
 background.propTypes = {
-  show: PropTypes.bool.isRequired
+  show: PropTypes.bool
 }
 
 export default background;
