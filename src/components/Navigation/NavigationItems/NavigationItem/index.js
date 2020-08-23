@@ -1,20 +1,22 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
+import { NavLink } from "react-router-dom";
+import classes from "./styles.css";
 
-import classes from './styles.css';
-
-const navigationItem = props => (
+const navigationItem = (props) => (
   <li className={classes.NavigationItem}>
-    <a href={props.link}
-      className={props.active ? classes.active : null}>
+    <NavLink
+      activeClassName={classes.active}
+      to={props.link}
+      exact={props.exact}
+    >
       {props.children}
-    </a>
+    </NavLink>
   </li>
 );
 
 navigationItem.propTypes = {
   link: PropTypes.string.isRequired,
-  active: PropTypes.bool
-}
+};
 
 export default navigationItem;
