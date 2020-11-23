@@ -6,6 +6,7 @@ import Button from '../../components/UI/Button';
 import Spinner from '../../components/UI/Spinner';
 import classes from './styles.css';
 import * as actions from '../../store/actions';
+import { updateObject, checkValidity } from '../../shared/utility';
 
 class Auth extends Component {
     state = {
@@ -45,43 +46,19 @@ class Auth extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.buildingBurger);
         if(!this.props.buildingBurger && this.props.authRedirectPath !== '/') {
             this.props.onSetAuthRedirectPath();
         }
     }
-    
-    checkValidity(value, rules) {
-        let isValid = false;
-
-        if (!rules) return true;
-
-        if (rules.required) {
-            isValid = value.trim() !== "";
-        }
-
-        if (rules.minLength) {
-            isValid = value.length >= rules.minLength; 
-        }
-
-        if (rules.isEmail) {
-            const pattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-            isValid = pattern.test(value) && isValid;
-        }
-
-        return isValid;
-    }
 
     inputChangedHandler = (event, controlName) => {
-        const updatedControls = {
-            ...this.state.controls,
-            [controlName]: {
-                ...this.state.controls[controlName],
+        const updatedControls = updateObject(this.state.controls, {
+             [controlName]: updateObject(...this.state.controls[controlName], {
                 value: event.target.value,
-                valid: this.checkValidity(event.target.value, this.state.controls[controlName].validation),
+                valid: checkValidity(event.target.value, this.state.controls[controlName].validation),
                 touched: true
-            }
-        }
+            })
+        }); 
         this.setState({ controls: updatedControls });
     }
 
